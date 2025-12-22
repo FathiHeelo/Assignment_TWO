@@ -1,7 +1,8 @@
 # Event Processing System - Refactored Version
+
+
 Java
 Design Patterns
-Repository: https://github.com/FathiHeelo/Refactored-TMPS-System-Running.git
 Project Overview
 This repository contains my complete refactoring of the TaskMaster Processing System (TMPS), a job processing and resource management application designed to handle various job types such as email sending, data processing, and report generation.
 Starting from a deliberately naive and flawed initial codebase, I thoroughly analyzed its issues (including SOLID violations, tight coupling, code duplication, poor cohesion, misuse of inheritance, incomplete TODOs, and structural problems), documented them, and transformed it into a clean, modular, extensible, and maintainable system. In addition to the four mandatory design patterns specified in the assignment (Connection Pool, Prototype, Strategy, Proxy), I incorporated additional patterns like Singleton (for managing the connection pool) and Factory (for strategy selection) to further enhance the architecture.
@@ -67,13 +68,6 @@ Concurrency: BlockingQueue and synchronization for thread safety
 Core Concepts: Design Patterns (Prototype, Strategy, Proxy, Singleton, Factory)
 
 
-How to Run
-Bashgit clone https://github.com/FathiHeelo/Refactored-TMPS-System-Running.git
-cd Refactored-TMPS-System-Running
-
-Open the project in your favorite Java IDE (IntelliJ IDEA or Eclipse recommended)
-Run the Main class to see sample job executions (email, data processing, report)
-Observe console output for validation, processing, connection pooling, timing, and execution flow
 
 What I Learned
 
@@ -82,12 +76,6 @@ Systematic identification and documentation of code smells, design flaws, and pr
 Building scalable, enterprise-ready systems in Java that adapt to evolving requirements
 Importance of combining patterns for optimal flexibility and performance in complex systems
 
-Future Enhancements (Ideas)
-
-Integrate with a real database (currently simulated)
-Add asynchronous job processing using ExecutorService
-Develop a simple web or desktop UI for job submission and monitoring
-Implement job persistence and scheduling features
 
 Refactored by: Fathi Heelo 🚀
 License: MIT - Feel free to fork, explore, and contribute!
