@@ -6,7 +6,21 @@ Project Overview
 This repository contains my complete refactoring of the TaskMaster Processing System (TMPS), a job processing and resource management application designed to handle various job types such as email sending, data processing, and report generation.
 Starting from a deliberately naive and flawed initial codebase, I thoroughly analyzed its issues (including SOLID violations, tight coupling, code duplication, poor cohesion, misuse of inheritance, incomplete TODOs, and structural problems), documented them, and transformed it into a clean, modular, extensible, and maintainable system. In addition to the four mandatory design patterns specified in the assignment (Connection Pool, Prototype, Strategy, Proxy), I incorporated additional patterns like Singleton (for managing the connection pool) and Factory (for strategy selection) to further enhance the architecture.
 Key Refactorings & Design Patterns Applied
-1. Connection Pool (Efficient Resource Management with Singleton)
+1. Decorator Pattern (Dynamic Behavior Addition)
+
+Used to add shared behaviors (e.g., validation, encryption handling, logging) dynamically without modifying the core event processor class
+Implemented EventProcessorDecorator abstract class
+Created concrete decorators: ValidationDecorator, NotificationDecorator, EncryptionDecorator (as applicable based on event details)
+Allows wrapping the base processor to extend functionality at runtime, ensuring flexibility for future changes in event structures
+
+2. Observer Pattern (Notification Mechanism)
+
+Employed to decouple the event processor from dependent modules, enabling loose coupling for notifications
+Introduced EventObserver interface
+Implemented concrete observers for other modules (e.g., LoggingObserver, ExternalModuleObserver)
+The EventProcessor acts as the subject, notifying observers upon successful event processing or key state changes
+Removes hard-coded notification logic, making the system easier to extend with new observers
+3. Connection Pool (Efficient Resource Management with Singleton)
 
 Implemented as a thread-safe Singleton to ensure a single instance manages up to 10 reusable database connections
 acquire() method blocks or queues when no connections are available
@@ -14,14 +28,14 @@ release() safely returns connections to the pool
 All job executions obtain connections via the Proxy pattern
 Additional Pattern: Singleton ensures global access and controlled instantiation of the pool
 
-2. Prototype Pattern (Fast Job Templating)
+4. Prototype Pattern (Fast Job Templating)
 
 Replaced expensive from-scratch job template creation with efficient cloning
 Implemented JobPrototype interface
 Created concrete prototypes: EmailJobTemplate, DataProcessingJobTemplate, ReportJobTemplate
 Built JobTemplateRegistry to store and retrieve reusable templates
 
-3. Strategy Pattern (Flexible Job Execution with Factory)
+5. Strategy Pattern (Flexible Job Execution with Factory)
 
 Eliminated long if/else chains and hard-coded type checks in JobExecutor
 Introduced JobStrategy interface
@@ -29,7 +43,7 @@ Implemented concrete strategies: EmailJobStrategy, DataProcessingStrategy, Repor
 Created JobStrategyFactory to map job types to appropriate strategies
 Additional Pattern: Factory provides a clean way to create and select strategies dynamically
 
-4. Proxy Pattern (Controlled & Monitored Execution)
+6. Proxy Pattern (Controlled & Monitored Execution)
 
 Added a proxy layer for secure and monitored job execution
 Handles user permission validation
